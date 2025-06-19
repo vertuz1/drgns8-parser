@@ -8,7 +8,11 @@ let currentCoefficient = null;
 
 async function updateCoefficient() {
   try {
-    const response = await axios.get('https://drgns8.casino/srv/api/v1/crash/state');
+    const response = await axios.get('https://drgns8.casino/srv/api/v1/crash/state', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0.0.0 Safari/537.36'
+      }
+    });
     const data = response.data;
 
     if (data && data.game_state === 'crashed') {
@@ -20,6 +24,7 @@ async function updateCoefficient() {
     console.error('Ошибка при получении коэффициента:', error.message);
   }
 }
+
 
 setInterval(updateCoefficient, 5000);
 
